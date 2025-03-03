@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Twitch...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #18181B;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    .progress-container {
+      width: 80%;
+      max-width: 400px;
+      background-color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px auto;
+      height: 20px;
+    }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #9146FF; /* Twitch primary color */
+      text-align: center;
+      line-height: 20px;
+      color: white;
+      font-weight: bold;
+      transition: width 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Loading Twitch, please wait...</h2>
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar">0%</div>
+</div>
+
+<script>
+  function updateProgress() {
+    let progressBar = document.getElementById("progressBar");
+    let width = 0;
+    let interval = setInterval(function() {
+      if (width >= 100) {
+        clearInterval(interval);
+        document.body.innerHTML = "<h1>Loading complete! Welcome to Twitch</h1>";
+      } else {
+        width += Math.floor(Math.random() * 10) + 5; // Increase 5-15% per update
+        if (width > 100) width = 100;
+        progressBar.style.width = width + "%";
+        progressBar.textContent = width + "%";
+      }
+    }, 500);
+  }
+
+  updateProgress();
+</script>
+
+</body>
+</html>
